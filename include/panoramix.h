@@ -9,6 +9,7 @@
     #define INCLUDED_PANORAMIX_H
 
     #include <pthread.h>
+    #include <stdio.h>
 
 typedef struct {
     int portion;

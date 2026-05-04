@@ -28,6 +28,9 @@ int main(int ac, char **av)
             return 84;
         }
     }
+    pthread_mutex_init(&pot.mutex, NULL);
+    pthread_cond_init(&pot.wake_druid, NULL);
+    pthread_cond_init(&pot.pot_refilled, NULL);
     pot.pot_size = atoi(av[2]);
     pot.portion = pot.pot_size;
     pot.pot_refills = atoi(av[4]);
@@ -46,5 +49,8 @@ int main(int ac, char **av)
     for (int i = 0; i < nb_villagers; i++)
         pthread_join(villager_threads[i], NULL);
     pthread_join(druid_thread, NULL);
+    pthread_mutex_destroy(&pot.mutex);
+    pthread_cond_destroy(&pot.wake_druid);
+    pthread_cond_destroy(&pot.pot_refilled);
     return 0;
 }

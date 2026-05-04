@@ -32,6 +32,7 @@ int main(int ac, char **av)
     pot.pot_size = atoi(av[2]);
     pot.portion = pot.pot_size;
     pot.pot_refills = atoi(av[4]);
+    pot.druid_done = false;
     nb_villagers = atoi(av[1]);
     nb_fights = atoi(av[3]);
     pthread_t villager_threads[nb_villagers];

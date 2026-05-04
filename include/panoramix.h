@@ -11,6 +11,7 @@
     #include <pthread.h>
     #include <stdio.h>
     #include <stdlib.h>
+    #include <stdbool.h>
 
 typedef struct {
     int portion;
@@ -19,6 +20,7 @@ typedef struct {
     pthread_mutex_t mutex;
     pthread_cond_t wake_druid;
     pthread_cond_t pot_refilled;
+    bool druid_done;
 } pot_t;
 
 typedef struct {

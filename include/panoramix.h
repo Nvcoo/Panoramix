@@ -22,4 +22,6 @@ typedef struct {
     pot_t *pot;
 } villager_t;
 
+void print_usage(void);
+
 #endif

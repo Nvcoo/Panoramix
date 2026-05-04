@@ -14,6 +14,9 @@ typedef struct {
     int portion;
     int pot_size;
     int pot_refills;
+    pthread_mutex_t mutex;
+    pthread_cond_t wake_druid;
+    pthread_cond_t pot_refilled;
 } pot_t;
 
 typedef struct {

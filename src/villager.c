@@ -6,7 +6,6 @@
 */
 
 #include "panoramix.h"
-#include <stdio.h>
 
 void *villager_routine(void *arg)
 {

@@ -24,4 +24,7 @@ typedef struct {
 
 void print_usage(void);
 
+void *villager_routine(void *arg);
+void *druid_routine(void *arg);
+
 #endif

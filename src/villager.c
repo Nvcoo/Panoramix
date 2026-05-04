@@ -5,3 +5,13 @@
 ** villager
 */
 
+#include "panoramix.h"
+#include <stdio.h>
+
+void *villager_routine(void *arg)
+{
+    villager_t *villager = (villager_t *)arg;
+
+    printf("Villager %d thread started\n", villager->id);
+    return NULL;
+}

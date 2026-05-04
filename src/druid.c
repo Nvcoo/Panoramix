@@ -11,6 +11,6 @@
 void *druid_routine(void *arg)
 {
     (void)arg;
-    printf("Druid thread started\n");
+    printf("Druid: I'm ready... but sleepy...\n");
     return NULL;
 }

@@ -14,6 +14,8 @@ CFLAGS = -Wall -Wextra -g -I./include
 LDFLAGS = -lpthread
 
 SRC =	./src/main.c \
+		./src/druid.c \
+		./src/villager.c \
 
 OBJ = $(SRC:.c=.o)
 

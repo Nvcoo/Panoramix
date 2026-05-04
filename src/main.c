@@ -5,8 +5,6 @@
 ** main
 */
 
-#include <pthread.h>
-#include <stdlib.h>
 #include "panoramix.h"
 
 int main(int ac, char **av)

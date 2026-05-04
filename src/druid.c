@@ -6,6 +6,7 @@
 */
 
 #include "panoramix.h"
+#include <stdio.h>
 
 void *druid_routine(void *arg)
 {
@@ -21,5 +22,6 @@ void *druid_routine(void *arg)
         pthread_cond_broadcast(&pot->pot_refilled);
         pthread_mutex_unlock(&pot->mutex);
     }
+    printf("Druid: I'm out of viscum. I'm going back to... zZz\n");
     return NULL;
 }

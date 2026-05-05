@@ -7,7 +7,7 @@
 
 .PHONY: all clean fclean re
 
-CC = gcc
+CC = cc
 
 CFLAGS = -Wall -Wextra -g -I./include
 

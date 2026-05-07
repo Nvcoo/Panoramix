@@ -6,6 +6,7 @@
 */
 
 #include "panoramix.h"
+#include <pthread.h>
 
 void sem_get(sem_t *s)
 {
@@ -30,4 +31,10 @@ void sem_setup(sem_t *s)
     s->max = 1;
     pthread_mutex_init(&s->mtx, NULL);
     pthread_cond_init(&s->cond, NULL);
+}
+
+void sem_cleanup(sem_t *s)
+{
+    pthread_mutex_destroy(&s->mtx);
+    pthread_cond_destroy(&s->cond);
 }

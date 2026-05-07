@@ -24,10 +24,10 @@ void sem_release(semaphore_t *s)
     pthread_mutex_unlock(&s->mtx);
 }
 
-void sem_setup(semaphore_t *s)
+void sem_setup(semaphore_t *s, int max)
 {
     s->count = 0;
-    s->max = 1;
+    s->max = max;
     pthread_mutex_init(&s->mtx, NULL);
     pthread_cond_init(&s->cond, NULL);
 }

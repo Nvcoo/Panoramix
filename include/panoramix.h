@@ -43,7 +43,7 @@ void *druid_routine(void *arg);
 
 void sem_get(semaphore_t *s);
 void sem_release(semaphore_t *s);
-void sem_setup(semaphore_t *s);
+void sem_setup(semaphore_t *s, int max);
 void sem_cleanup(semaphore_t *s);
 
 #endif

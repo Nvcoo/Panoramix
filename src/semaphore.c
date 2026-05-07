@@ -16,3 +16,11 @@ void sem_get(sem_t *s)
     s->count++;
     pthread_mutex_unlock(&s->mtx);
 }
+
+void sem_release(sem_t *s)
+{
+    pthread_mutex_lock(&s->mtx);
+    s->count--;
+    pthread_cond_signal(&s->cond);
+    pthread_mutex_unlock(&s->mtx);
+}

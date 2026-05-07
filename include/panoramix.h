@@ -34,16 +34,16 @@ typedef struct {
     int max;
     pthread_mutex_t mtx;
     pthread_cond_t cond;
-} sem_t;
+} semaphore_t;
 
 void print_usage(void);
 
 void *villager_routine(void *arg);
 void *druid_routine(void *arg);
 
-void sem_get(sem_t *s);
-void sem_release(sem_t *s);
-void sem_setup(sem_t *s);
-void sem_cleanup(sem_t *s);
+void sem_get(semaphore_t *s);
+void sem_release(semaphore_t *s);
+void sem_setup(semaphore_t *s);
+void sem_cleanup(semaphore_t *s);
 
 #endif

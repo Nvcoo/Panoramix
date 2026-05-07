@@ -6,9 +6,8 @@
 */
 
 #include "panoramix.h"
-#include <pthread.h>
 
-void sem_get(sem_t *s)
+void sem_get(semaphore_t *s)
 {
     pthread_mutex_lock(&s->mtx);
     while (s->count >= s->max)
@@ -17,7 +16,7 @@ void sem_get(sem_t *s)
     pthread_mutex_unlock(&s->mtx);
 }
 
-void sem_release(sem_t *s)
+void sem_release(semaphore_t *s)
 {
     pthread_mutex_lock(&s->mtx);
     s->count--;
@@ -25,7 +24,7 @@ void sem_release(sem_t *s)
     pthread_mutex_unlock(&s->mtx);
 }
 
-void sem_setup(sem_t *s)
+void sem_setup(semaphore_t *s)
 {
     s->count = 0;
     s->max = 1;
@@ -33,7 +32,7 @@ void sem_setup(sem_t *s)
     pthread_cond_init(&s->cond, NULL);
 }
 
-void sem_cleanup(sem_t *s)
+void sem_cleanup(semaphore_t *s)
 {
     pthread_mutex_destroy(&s->mtx);
     pthread_cond_destroy(&s->cond);

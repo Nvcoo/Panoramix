@@ -14,6 +14,13 @@
     #include <stdbool.h>
 
 typedef struct {
+    int count;
+    int max;
+    pthread_mutex_t mtx;
+    pthread_cond_t cond;
+} semaphore_t;
+
+typedef struct {
     int portion;
     int pot_size;
     int pot_refills;
@@ -21,6 +28,7 @@ typedef struct {
     pthread_cond_t wake_druid;
     pthread_cond_t pot_refilled;
     bool druid_done;
+    semaphore_t sem;
 } pot_t;
 
 typedef struct {
@@ -28,13 +36,6 @@ typedef struct {
     int nb_fights;
     pot_t *pot;
 } villager_t;
-
-typedef struct {
-    int count;
-    int max;
-    pthread_mutex_t mtx;
-    pthread_cond_t cond;
-} semaphore_t;
 
 void print_usage(void);
 

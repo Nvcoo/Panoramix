@@ -29,6 +29,7 @@ typedef struct {
     pthread_cond_t pot_refilled;
     bool druid_done;
     semaphore_t sem;
+    pthread_mutex_t display_mutex;
 } pot_t;
 
 typedef struct {

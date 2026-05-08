@@ -6,12 +6,14 @@
 */
 
 #include "panoramix.h"
+#include <pthread.h>
 
 void pot_init(pot_t *pot, char **av)
 {
     pthread_mutex_init(&pot->mutex, NULL);
     pthread_cond_init(&pot->wake_druid, NULL);
     pthread_cond_init(&pot->pot_refilled, NULL);
+    pthread_mutex_init(&pot->display_mutex, NULL);
     pot->pot_size = atoi(av[2]);
     pot->portion = pot->pot_size;
     pot->pot_refills = atoi(av[4]);
@@ -21,6 +23,7 @@ void pot_init(pot_t *pot, char **av)
 void pot_destroy(pot_t *pot)
 {
     pthread_mutex_destroy(&pot->mutex);
+    pthread_mutex_destroy(&pot->display_mutex);
     pthread_cond_destroy(&pot->wake_druid);
     pthread_cond_destroy(&pot->pot_refilled);
 }

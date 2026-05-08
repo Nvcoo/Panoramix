@@ -27,6 +27,8 @@ void *villager_routine(void *arg)
             pthread_mutex_unlock(&villager->pot->display_mutex);
             sem_release(&villager->pot->sem);
             pthread_mutex_lock(&villager->pot->mutex);
+            while (!villager->pot->druid_ready)
+                pthread_cond_wait(&villager->pot->pot_refilled, &villager->pot->mutex);
             pthread_cond_signal(&villager->pot->wake_druid);
             pthread_cond_wait(&villager->pot->pot_refilled, &villager->pot->mutex);
             pthread_mutex_unlock(&villager->pot->mutex);

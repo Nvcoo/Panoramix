@@ -25,16 +25,16 @@ void *villager_routine(void *arg)
             pthread_mutex_lock(&villager->pot->display_mutex);
             printf("Villager %d: Hey Pano wake up! We need more potion.\n", villager->id);
             pthread_mutex_unlock(&villager->pot->display_mutex);
-            pthread_cond_signal(&villager->pot->wake_druid);
             sem_release(&villager->pot->sem);
             pthread_mutex_lock(&villager->pot->mutex);
+            pthread_cond_signal(&villager->pot->wake_druid);
             pthread_cond_wait(&villager->pot->pot_refilled, &villager->pot->mutex);
             pthread_mutex_unlock(&villager->pot->mutex);
             sem_get(&villager->pot->sem);
         }
         if (villager->pot->portion == 0 && villager->pot->druid_done) {
             sem_release(&villager->pot->sem);
-            pthread_mutex_unlock(&villager->pot->display_mutex);
+            pthread_mutex_lock(&villager->pot->display_mutex);
             printf("Villager %d: I'm going to sleep now.\n", villager->id);
             pthread_mutex_unlock(&villager->pot->display_mutex);
             return NULL;

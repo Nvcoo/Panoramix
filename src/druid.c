@@ -27,7 +27,9 @@ void *druid_routine(void *arg)
         pot->portion = pot->pot_size;
         pot->druid_ready = false;
         pthread_mutex_lock(&pot->display_mutex);
-        printf("Druid: Ah! Yes, yes, I'm awake! Working on it! Beware I can only make %d more refills after this one.\n", pot->pot_refills);
+        printf("Druid: Ah! Yes, yes, I'm awake! Working on it! ");
+        printf("Beware I can only ");
+        printf("make %d more refills after this one.\n", pot->pot_refills);
         pthread_mutex_unlock(&pot->display_mutex);
         pthread_cond_broadcast(&pot->pot_refilled);
         pthread_mutex_unlock(&pot->mutex);

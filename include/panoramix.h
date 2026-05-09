@@ -47,6 +47,8 @@ void sem_setup(semaphore_t *s, int max);
 void sem_cleanup(semaphore_t *s);
 void pot_init(pot_t *pot, char **av);
 void pot_destroy(pot_t *pot);
-
+void start_villagers(pot_t *pot, pthread_t *threads, villager_t *vill,
+    int nb_vill);
+void simulate(pot_t *pot, char **av);
 
 #endif

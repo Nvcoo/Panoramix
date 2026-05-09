@@ -19,6 +19,7 @@ SRC =	./src/main.c \
 		./src/print_usage.c \
 		./src/semaphore.c \
 		./src/pot.c \
+		./src/simulation.c \
 
 OBJ = $(SRC:.c=.o)
 

@@ -14,10 +14,10 @@ void start_villagers(pot_t *pot, pthread_t *threads, villager_t *vill,
         pthread_create(&threads[i], NULL, villager_routine, &vill[i]);
     for (int i = 0; i < nb_vill; i++)
         pthread_join(threads[i], NULL);
-    pthread_mutex_lock(&pot->mutex);
-    pot->villagers_done = true;
-    pthread_cond_signal(&pot->wake_druid);
-    pthread_mutex_unlock(&pot->mutex);
+    pthread_mutex_lock(&pot->sync.mutex);
+    pot->flags.villagers_done = true;
+    pthread_cond_signal(&pot->sync.wake_druid);
+    pthread_mutex_unlock(&pot->sync.mutex);
 }
 
 void simulate(pot_t *pot, char **av)
@@ -28,17 +28,17 @@ void simulate(pot_t *pot, char **av)
     villager_t villagers[nb_villagers];
     pthread_t druid_thread;
 
-    sem_setup(&pot->sem, 1);
+    sem_setup(&pot->sync.sem, 1);
     for (int i = 0; i < nb_villagers; i++) {
         villagers[i].id = i;
         villagers[i].nb_fights = nb_fights;
         villagers[i].pot = pot;
     }
     pthread_create(&druid_thread, NULL, druid_routine, pot);
-    pthread_mutex_lock(&pot->mutex);
-    while (!pot->druid_ready)
-        pthread_cond_wait(&pot->pot_refilled, &pot->mutex);
-    pthread_mutex_unlock(&pot->mutex);
+    pthread_mutex_lock(&pot->sync.mutex);
+    while (!pot->flags.druid_ready)
+        pthread_cond_wait(&pot->sync.pot_refilled, &pot->sync.mutex);
+    pthread_mutex_unlock(&pot->sync.mutex);
     start_villagers(pot, villager_threads, villagers, nb_villagers);
     pthread_join(druid_thread, NULL);
 }

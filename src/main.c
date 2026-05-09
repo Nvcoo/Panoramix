@@ -6,8 +6,10 @@
 */
 
 #include "panoramix.h"
+#include <bits/pthreadtypes.h>
 #include <pthread.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
 void pot_init(pot_t *pot, char **av)
 {
@@ -29,13 +31,40 @@ void pot_destroy(pot_t *pot)
     pthread_cond_destroy(&pot->pot_refilled);
 }
 
+void simulate(pot_t *pot, char **av)
+{
+    int nb_villagers = atoi(av[1]);
+    int nb_fights = atoi(av[3]);
+    pthread_t villager_threads[nb_villagers];
+    villager_t villagers[nb_villagers];
+    pthread_t druid_thread;
+
+    sem_setup(&pot->sem, 1);
+    for (int i = 0; i < nb_villagers; i++) {
+        villagers[i].id = i;
+        villagers[i].nb_fights = nb_fights;
+        villagers[i].pot = pot;
+    }
+    pthread_create(&druid_thread, NULL, druid_routine, pot);
+    pthread_mutex_lock(&pot->mutex);
+    while (!pot->druid_ready)
+        pthread_cond_wait(&pot->pot_refilled, &pot->mutex);
+    pthread_mutex_unlock(&pot->mutex);
+    for (int i = 0; i < nb_villagers; i++)
+        pthread_create(&villager_threads[i], NULL, villager_routine, &villagers[i]);
+    for (int i = 0; i < nb_villagers; i++)
+        pthread_join(villager_threads[i], NULL);
+    pthread_mutex_lock(&pot->mutex);
+    pot->villagers_done = true;
+    pthread_cond_signal(&pot->wake_druid);
+    pthread_mutex_unlock(&pot->mutex);
+    pthread_join(druid_thread, NULL);
+}
+
 int main(int ac, char **av)
 {
     int value = 0;
-    int nb_villagers = 0;
-    int nb_fights = 0;
     pot_t pot;
-    pthread_t druid_thread;
 
     if (ac != 5) {
         print_usage();
@@ -49,30 +78,7 @@ int main(int ac, char **av)
         }
     }
     pot_init(&pot, av);
-    nb_villagers = atoi(av[1]);
-    nb_fights = atoi(av[3]);
-    sem_setup(&pot.sem, 1);
-    pthread_t villager_threads[nb_villagers];
-    villager_t villagers[nb_villagers];
-    for (int i = 0; i < nb_villagers; i++) {
-        villagers[i].id = i;
-        villagers[i].nb_fights = nb_fights;
-        villagers[i].pot = &pot;
-    }
-    pthread_create(&druid_thread, NULL, druid_routine, &pot);
-    pthread_mutex_lock(&pot.mutex);
-    while (!pot.druid_ready)
-        pthread_cond_wait(&pot.pot_refilled, &pot.mutex);
-    pthread_mutex_unlock(&pot.mutex);
-    for (int i = 0; i < nb_villagers; i++)
-        pthread_create(&villager_threads[i], NULL, villager_routine, &villagers[i]);
-    for (int i = 0; i < nb_villagers; i++)
-        pthread_join(villager_threads[i], NULL);
-    pthread_mutex_lock(&pot.mutex);
-    pot.villagers_done = true;
-    pthread_cond_signal(&pot.wake_druid);
-    pthread_mutex_unlock(&pot.mutex);
-    pthread_join(druid_thread, NULL);
+    simulate(&pot, av);
     pot_destroy(&pot);
     sem_cleanup(&pot.sem);
     return 0;

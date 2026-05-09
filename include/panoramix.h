@@ -4,7 +4,6 @@
 ** File description:
 ** panoramix
 */
-
 #ifndef INCLUDED_PANORAMIX_H
     #define INCLUDED_PANORAMIX_H
 
@@ -28,8 +27,9 @@ typedef struct {
     pthread_cond_t wake_druid;
     pthread_cond_t pot_refilled;
     bool druid_done;
+    bool druid_ready;
+    bool villagers_done;
     semaphore_t sem;
-    pthread_mutex_t display_mutex;
 } pot_t;
 
 typedef struct {
@@ -39,10 +39,8 @@ typedef struct {
 } villager_t;
 
 void print_usage(void);
-
 void *villager_routine(void *arg);
 void *druid_routine(void *arg);
-
 void sem_get(semaphore_t *s);
 void sem_release(semaphore_t *s);
 void sem_setup(semaphore_t *s, int max);

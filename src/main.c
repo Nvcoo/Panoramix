@@ -14,17 +14,17 @@ void pot_init(pot_t *pot, char **av)
     pthread_mutex_init(&pot->mutex, NULL);
     pthread_cond_init(&pot->wake_druid, NULL);
     pthread_cond_init(&pot->pot_refilled, NULL);
-    pthread_mutex_init(&pot->display_mutex, NULL);
     pot->pot_size = atoi(av[2]);
     pot->portion = pot->pot_size;
     pot->pot_refills = atoi(av[4]);
     pot->druid_done = false;
+    pot->druid_ready = false;
+    pot->villagers_done = false;
 }
 
 void pot_destroy(pot_t *pot)
 {
     pthread_mutex_destroy(&pot->mutex);
-    pthread_mutex_destroy(&pot->display_mutex);
     pthread_cond_destroy(&pot->wake_druid);
     pthread_cond_destroy(&pot->pot_refilled);
 }
@@ -59,11 +59,19 @@ int main(int ac, char **av)
         villagers[i].nb_fights = nb_fights;
         villagers[i].pot = &pot;
     }
+    pthread_create(&druid_thread, NULL, druid_routine, &pot);
+    pthread_mutex_lock(&pot.mutex);
+    while (!pot.druid_ready)
+        pthread_cond_wait(&pot.pot_refilled, &pot.mutex);
+    pthread_mutex_unlock(&pot.mutex);
     for (int i = 0; i < nb_villagers; i++)
         pthread_create(&villager_threads[i], NULL, villager_routine, &villagers[i]);
-    pthread_create(&druid_thread, NULL, druid_routine, &pot);
     for (int i = 0; i < nb_villagers; i++)
         pthread_join(villager_threads[i], NULL);
+    pthread_mutex_lock(&pot.mutex);
+    pot.villagers_done = true;
+    pthread_cond_signal(&pot.wake_druid);
+    pthread_mutex_unlock(&pot.mutex);
     pthread_join(druid_thread, NULL);
     pot_destroy(&pot);
     sem_cleanup(&pot.sem);

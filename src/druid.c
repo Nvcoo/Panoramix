@@ -7,6 +7,20 @@
 
 #include "panoramix.h"
 #include <pthread.h>
+#include <stdio.h>
+
+void do_refill(pot_t *pot)
+{
+    pot->pot_refills--;
+    pot->portion = pot->pot_size;
+    printf("Druid: Ah! Yes, yes, I'm awake! Working on it! ");
+    printf("Beware I can only make %d more refills after this one.\n",
+        pot->pot_refills);
+    pot->druid_ready = false;
+    pthread_cond_broadcast(&pot->pot_refilled);
+    pot->druid_ready = true;
+    pthread_cond_broadcast(&pot->pot_refilled);
+}
 
 void *druid_routine(void *arg)
 {
@@ -20,13 +34,7 @@ void *druid_routine(void *arg)
         pthread_cond_wait(&pot->wake_druid, &pot->mutex);
         if (pot->villagers_done)
             break;
-        pot->pot_refills--;
-        pot->portion = pot->pot_size;
-        printf("Druid: Ah! Yes, yes, I'm awake! Working on it! Beware I can only make %d more refills after this one.\n", pot->pot_refills);
-        pot->druid_ready = false;
-        pthread_cond_broadcast(&pot->pot_refilled);
-        pot->druid_ready = true;
-        pthread_cond_broadcast(&pot->pot_refilled);
+        do_refill(pot);
     }
     pot->druid_done = true;
     pthread_cond_broadcast(&pot->pot_refilled);

@@ -18,6 +18,7 @@ SRC =	./src/main.c \
 		./src/villager.c \
 		./src/print_usage.c \
 		./src/semaphore.c \
+		./src/pot.c \
 
 OBJ = $(SRC:.c=.o)
 

@@ -45,5 +45,8 @@ void sem_get(semaphore_t *s);
 void sem_release(semaphore_t *s);
 void sem_setup(semaphore_t *s, int max);
 void sem_cleanup(semaphore_t *s);
+void pot_init(pot_t *pot, char **av);
+void pot_destroy(pot_t *pot);
+
 
 #endif

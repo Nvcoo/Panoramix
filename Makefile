@@ -16,6 +16,7 @@ LDFLAGS = -lpthread
 SRC =	./src/main.c \
 		./src/druid.c \
 		./src/villager.c \
+		./src/villager_actions.c \
 		./src/print_usage.c \
 		./src/semaphore.c \
 		./src/pot.c \

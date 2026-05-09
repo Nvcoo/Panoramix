@@ -52,5 +52,6 @@ void start_villagers(pot_t *pot, pthread_t *threads, villager_t *vill,
 void simulate(pot_t *pot, char **av);
 void wait_for_refill(villager_t *vill);
 int do_fight(villager_t *villager);
+void do_refill(pot_t *pot);
 
 #endif

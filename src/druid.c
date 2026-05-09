@@ -6,8 +6,6 @@
 */
 
 #include "panoramix.h"
-#include <pthread.h>
-#include <stdio.h>
 
 void do_refill(pot_t *pot)
 {

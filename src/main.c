@@ -19,7 +19,6 @@ void pot_init(pot_t *pot, char **av)
     pot->portion = pot->pot_size;
     pot->pot_refills = atoi(av[4]);
     pot->druid_done = false;
-    pot->druid_ready = false;
 }
 
 void pot_destroy(pot_t *pot)

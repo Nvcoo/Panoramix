@@ -24,13 +24,25 @@ typedef struct {
     int portion;
     int pot_size;
     int pot_refills;
+} pot_data_t;
+
+typedef struct {
     pthread_mutex_t mutex;
     pthread_cond_t wake_druid;
     pthread_cond_t pot_refilled;
+    semaphore_t sem;
+} pot_threading_t;
+
+typedef struct {
     bool druid_done;
     bool druid_ready;
     bool villagers_done;
-    semaphore_t sem;
+} pot_flags_t;
+
+typedef struct {
+    pot_data_t data;
+    pot_threading_t sync;
+    pot_flags_t flags;
 } pot_t;
 
 typedef struct {

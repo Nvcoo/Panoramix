@@ -17,7 +17,8 @@ void *villager_routine(void *arg)
         printf("Villager %d: I need a drink... I see %d servings left.\n",
             villager->id, villager->pot->data.portion);
         wait_for_refill(villager);
-        if (villager->pot->flags.druid_done && villager->pot->data.portion == 0) {
+        if (villager->pot->flags.druid_done
+            && villager->pot->data.portion == 0) {
             pthread_mutex_unlock(&villager->pot->sync.mutex);
             printf("Villager %d: I'm going to sleep now.\n", villager->id);
             return NULL;

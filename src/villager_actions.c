@@ -13,9 +13,11 @@ void wait_for_refill(villager_t *vill)
         printf("Villager %d: Hey Pano wake up! We need more potion.\n",
             vill->id);
         while (!vill->pot->flags.druid_ready)
-            pthread_cond_wait(&vill->pot->sync.pot_refilled, &vill->pot->sync.mutex);
+            pthread_cond_wait(&vill->pot->sync.pot_refilled,
+        &vill->pot->sync.mutex);
         pthread_cond_signal(&vill->pot->sync.wake_druid);
-        pthread_cond_wait(&vill->pot->sync.pot_refilled, &vill->pot->sync.mutex);
+        pthread_cond_wait(&vill->pot->sync.pot_refilled,
+            &vill->pot->sync.mutex);
     }
 }
 

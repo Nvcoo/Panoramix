@@ -6,7 +6,6 @@
 */
 
 #include "panoramix.h"
-#include <pthread.h>
 
 void wait_for_refill(villager_t *vill)
 {

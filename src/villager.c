@@ -8,15 +8,15 @@
 #include "panoramix.h"
 #include <pthread.h>
 
-void wait_for_refill(villager_t *villager)
+void wait_for_refill(villager_t *vill)
 {
-    while (villager->pot->portion == 0 && !villager->pot->druid_done) {
+    while (vill->pot->portion == 0 && !vill->pot->druid_done) {
         printf("Villager %d: Hey Pano wake up! We need more potion.\n",
-            villager->id);
-        while (!villager->pot->druid_ready)
-            pthread_cond_wait(&villager->pot->pot_refilled, &villager->pot->mutex);
-        pthread_cond_signal(&villager->pot->wake_druid);
-        pthread_cond_wait(&villager->pot->pot_refilled, &villager->pot->mutex);
+            vill->id);
+        while (!vill->pot->druid_ready)
+            pthread_cond_wait(&vill->pot->pot_refilled, &vill->pot->mutex);
+        pthread_cond_signal(&vill->pot->wake_druid);
+        pthread_cond_wait(&vill->pot->pot_refilled, &vill->pot->mutex);
     }
 }
 

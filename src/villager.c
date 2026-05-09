@@ -13,12 +13,12 @@ void *villager_routine(void *arg)
 
     printf("Villager %d: Going into battle!\n", villager->id);
     while (villager->nb_fights > 0) {
-        pthread_mutex_lock(&villager->pot->mutex);
+        pthread_mutex_lock(&villager->pot->sync.mutex);
         printf("Villager %d: I need a drink... I see %d servings left.\n",
-            villager->id, villager->pot->portion);
+            villager->id, villager->pot->data.portion);
         wait_for_refill(villager);
-        if (villager->pot->druid_done && villager->pot->portion == 0) {
-            pthread_mutex_unlock(&villager->pot->mutex);
+        if (villager->pot->flags.druid_done && villager->pot->data.portion == 0) {
+            pthread_mutex_unlock(&villager->pot->sync.mutex);
             printf("Villager %d: I'm going to sleep now.\n", villager->id);
             return NULL;
         }

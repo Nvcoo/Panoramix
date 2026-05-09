@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2026
-** panoramix
+** Panoramix
 ** File description:
 ** druid_actions
 */

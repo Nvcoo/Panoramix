@@ -5,7 +5,7 @@ A multithreaded simulation of villagers drinking magic potions and fighting enem
 ## Usage
 
 ```bash
-./panoramix
+./panoramix <nb_villagers> <pot_size> <nb_fights> <nb_refills>
 ```
 
 ## Arguments
@@ -44,9 +44,9 @@ The program returns:
 ## Synchronization Strategy
 
 - A mutex protects access to the potion pot state.
-- A semaphore is used to wake the druid when the pot becomes empty.
+- A semaphore controls access to the pot, limiting 1 villager at a time.
 - Villagers block while waiting for a refill.
-- The druid thread exits when no refills remain.
+- The druid thread exits when no refills remain or all villagers have finished.
 
 ## Project Goals
 

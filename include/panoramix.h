@@ -14,13 +14,6 @@
     #include <stdbool.h>
     #include "pot.h"
 
-//typedef struct {
-//    int count;
-//    int max;
-//    pthread_mutex_t mtx;
-//    pthread_cond_t cond;
-//} semaphore_t;
-
 typedef struct {
     int id;
     int nb_fights;

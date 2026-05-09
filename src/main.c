@@ -6,10 +6,6 @@
 */
 
 #include "panoramix.h"
-#include <bits/pthreadtypes.h>
-#include <pthread.h>
-#include <stdbool.h>
-#include <stdlib.h>
 
 void pot_init(pot_t *pot, char **av)
 {

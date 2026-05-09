@@ -4,6 +4,7 @@
 ** File description:
 ** panoramix
 */
+
 #ifndef INCLUDED_PANORAMIX_H
     #define INCLUDED_PANORAMIX_H
 

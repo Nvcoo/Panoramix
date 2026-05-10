@@ -30,7 +30,9 @@ NAME = panoramix
 all: $(NAME)
 
 $(NAME): $(OBJ)
-		$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LDFLAGS)
+		@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LDFLAGS)
+		@echo "Compiled successfully!"
+		@echo "Binary: $(NAME)"
 
 clean:
 		rm -f $(OBJ)

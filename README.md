@@ -21,6 +21,12 @@ A multithreaded simulation of villagers drinking magic potions and fighting enem
 make
 ```
 
+
+For all available build rules:
+```bash
+make help
+```
+
 ## Run
 
 Example

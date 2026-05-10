@@ -5,7 +5,7 @@
 ## Makefile
 ##
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re help
 
 CC = clang
 
@@ -39,3 +39,11 @@ fclean: clean
 		rm -f $(NAME)
 
 re:	fclean all
+
+help:
+	@echo "Available rules:"
+	@echo "	all	-> build the project"
+	@echo "	clean	-> remove object files"
+	@echo "	fclean	-> remove object files and binary"
+	@echo "	re	-> rebuild from scratch"
+	@echo "	help	-> show this message"

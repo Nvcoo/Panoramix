@@ -5,7 +5,7 @@
 ## Makefile
 ##
 
-.PHONY: all clean fclean re help
+.PHONY: all clean fclean re help debug
 
 CC = clang
 
@@ -47,3 +47,8 @@ help:
 	@echo "	fclean	-> remove object files and binary"
 	@echo "	re	-> rebuild from scratch"
 	@echo "	help	-> show this message"
+	@echo "	debug	-> build with sanitizers"
+
+debug:	CFLAGS += -fsanitize=address,undefined
+debug:	LDFLAGS += -fsanitize=address,undefined
+debug:	re

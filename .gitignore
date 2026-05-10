@@ -1,4 +1,5 @@
 panoramix
 *.o
 *.a
+*.d
 *.log

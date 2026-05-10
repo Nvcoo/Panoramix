@@ -39,10 +39,12 @@ $(NAME): $(OBJ)
 	@echo "CC $<"
 
 clean:
-		rm -f $(OBJ)
+	@rm -f $(OBJ)
+	@echo "Object files removed"
 
 fclean: clean
-		rm -f $(NAME)
+	@rm -f $(NAME)
+	@echo "Binary removed"
 
 re:	fclean all
 

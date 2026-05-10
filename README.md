@@ -69,3 +69,6 @@ This project focuses on:
 - multiple villagers waking the druid simultaneously
 - deadlocks during shutdown
 - villagers waiting indefinitely after the druid runs out of refills
+
+## Lincense
+MIT

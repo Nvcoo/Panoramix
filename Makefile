@@ -34,6 +34,10 @@ $(NAME): $(OBJ)
 		@echo "Compiled successfully!"
 		@echo "Binary: $(NAME)"
 
+%.o: %.c
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@echo "CC $<"
+
 clean:
 		rm -f $(OBJ)
 

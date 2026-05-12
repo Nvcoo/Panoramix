@@ -27,7 +27,6 @@ int main(int ac, char **av)
     pot_init(&pot, av);
     simulate(&pot, av);
     pot_destroy(&pot);
-    //sem_cleanup(&pot.sync.sem);
     sem_destroy(&pot.sync.sem);
     return 0;
 }

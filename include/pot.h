@@ -11,7 +11,7 @@
     #include <pthread.h>
     #include <stdio.h>
     #include <stdlib.h>
-    #include "semaphore.h"
+    #include <semaphore.h>
 
 typedef struct {
     int portion;
@@ -23,7 +23,7 @@ typedef struct {
     pthread_mutex_t mutex;
     pthread_cond_t wake_druid;
     pthread_cond_t pot_refilled;
-    semaphore_t sem;
+    sem_t sem;
 } pot_threading_t;
 
 typedef struct {

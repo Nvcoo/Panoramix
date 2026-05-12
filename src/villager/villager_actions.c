@@ -6,6 +6,7 @@
 */
 
 #include "panoramix.h"
+#include <semaphore.h>
 
 void wait_for_refill(villager_t *vill)
 {
@@ -25,11 +26,13 @@ int do_fight(villager_t *villager)
 {
     villager->pot->data.portion--;
     pthread_mutex_unlock(&villager->pot->sync.mutex);
-    sem_get(&villager->pot->sync.sem);
+    //sem_get(&villager->pot->sync.sem);
+    sem_wait(&villager->pot->sync.sem);
     villager->nb_fights--;
     printf("Villager %d: Take that roman scum! Only %d left.\n",
         villager->id, villager->nb_fights);
-    sem_release(&villager->pot->sync.sem);
+    //sem_release(&villager->pot->sync.sem);
+    sem_post(&villager->pot->sync.sem);
     if (villager->nb_fights == 0) {
         printf("Villager %d: I'm going to sleep now.\n", villager->id);
         return 1;

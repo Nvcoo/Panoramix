@@ -6,6 +6,7 @@
 */
 
 #include "panoramix.h"
+#include <semaphore.h>
 
 void start_villagers(pot_t *pot, pthread_t *threads, villager_t *vill,
     int nb_vill)
@@ -28,7 +29,8 @@ void simulate(pot_t *pot, char **av)
     villager_t villagers[nb_villagers];
     pthread_t druid_thread;
 
-    sem_setup(&pot->sync.sem, 1);
+    //sem_setup(&pot->sync.sem, 1);
+    sem_init(&pot->sync.sem, 0, 1);
     for (int i = 0; i < nb_villagers; i++) {
         villagers[i].id = i;
         villagers[i].nb_fights = nb_fights;

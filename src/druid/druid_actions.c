@@ -1,8 +1,6 @@
 /*
-** EPITECH PROJECT, 2026
-** Panoramix
-** File description:
-** druid_actions
+** File: druid_actions.c
+** handles the druid actions
 */
 
 #include "panoramix.h"

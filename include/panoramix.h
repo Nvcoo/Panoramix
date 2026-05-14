@@ -1,8 +1,6 @@
 /*
-** EPITECH PROJECT, 2026
-** Panoramix
-** File description:
-** panoramix
+** File: panoramix.h
+** header for the panoramix project
 */
 
 #ifndef INCLUDED_PANORAMIX_H

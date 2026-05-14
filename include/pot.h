@@ -1,8 +1,6 @@
 /*
-** EPITECH PROJECT, 2026
-** panoramix
-** File description:
-** pot
+** File: pot.h
+** header for the pot
 */
 
 #ifndef INCLUDED_POT_H

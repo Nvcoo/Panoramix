@@ -1,8 +1,6 @@
 /*
-** EPITECH PROJECT, 2026
-** Panoramix
-** File description:
-** print_usage
+** File: print_usage.c
+** prints the usage of the program
 */
 
 #include "panoramix.h"

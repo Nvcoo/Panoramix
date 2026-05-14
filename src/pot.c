@@ -1,8 +1,6 @@
 /*
-** EPITECH PROJECT, 2026
-** Panoramix
-** File description:
-** pot
+** File: pot.c
+** handles the pot
 */
 
 #include "panoramix.h"

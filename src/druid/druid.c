@@ -1,8 +1,6 @@
 /*
-** EPITECH PROJECT, 2026
-** Panoramix
-** File description:
-** druid
+** File: druid.c
+** druid routine
 */
 
 #include "panoramix.h"

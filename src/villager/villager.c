@@ -1,8 +1,6 @@
 /*
-** EPITECH PROJECT, 2026
-** Panoramix
-** File description:
-** villager
+** File: villager.c
+** villager routine
 */
 
 #include "panoramix.h"

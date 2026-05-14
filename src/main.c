@@ -1,8 +1,6 @@
 /*
-** EPITECH PROJECT, 2026
-** Panoramix
-** File description:
-** main
+** File: main.c
+** main file
 */
 
 #include "panoramix.h"

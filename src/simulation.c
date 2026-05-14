@@ -1,8 +1,6 @@
 /*
-** EPITECH PROJECT, 2026
-** Panoramix
-** File description:
-** simulation
+** File: simulation.c
+** handles the simulation
 */
 
 #include "panoramix.h"

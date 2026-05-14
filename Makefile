@@ -1,8 +1,5 @@
 ##
-## EPITECH PROJECT, 2026
-## Panoramix
-## File description:
-## Makefile
+## Makefile for the Panoramix project
 ##
 
 .PHONY: all clean fclean re help debug

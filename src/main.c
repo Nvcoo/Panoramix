@@ -4,7 +4,6 @@
 */
 
 #include "panoramix.h"
-#include <semaphore.h>
 
 int main(int ac, char **av)
 {

@@ -4,7 +4,6 @@
 */
 
 #include "panoramix.h"
-#include <semaphore.h>
 
 void wait_for_refill(villager_t *vill)
 {

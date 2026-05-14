@@ -4,7 +4,6 @@
 */
 
 #include "panoramix.h"
-#include <semaphore.h>
 
 void start_villagers(pot_t *pot, pthread_t *threads, villager_t *vill,
     int nb_vill)
